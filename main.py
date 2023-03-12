@@ -14,10 +14,14 @@ class Server(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if self.path == "/send-img":
-            data = self.rfile.read(int(self.headers.get('Content-Length'))).decode("utf-8")
+            data = str.encode(
+                self.rfile.read(
+                    int(self.headers.get('Content-Length'))
+                    ).decode("utf-8")[23:]
+            )
 
-            # with open("image.png", "wb") as f:
-            #     f.write(decodebytes(data))
+            with open("image.png", "wb") as f:
+                f.write(base64.decodebytes(data))
 
             print(data)
 
