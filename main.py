@@ -20,8 +20,6 @@ class Server(BaseHTTPRequestHandler):
             with open("image.png", "wb") as f:
                 f.write(base64.decodebytes(data))
 
-            print(data)
-
 if __name__ == "__main__":        
     webServer = HTTPServer(("localhost", 8080), Server)
     print("Server started http://%s:%s" % ("localhost", 8080))
